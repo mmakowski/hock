@@ -1,7 +1,7 @@
 module Sylbase where
 
 consonants :: [Char]
-consonants = "bcdfghjklmnprstvwxz"
+consonants = "bcdfghjklmnprstvwz"
 
 vowels :: [Char]
 vowels = "aeiouy"
@@ -24,3 +24,5 @@ toSyllable block =
       index2 = block `div` (length consonants) `mod` (length vowels)
       index3 = block `div` ((length consonants) + (length vowels)) `mod` (length consonants)
   in (consonants !! index1) : (vowels !! index2) : (consonants !! index3) : []
+
+-- TODO: urbit uses 8-bit blocks. How does it map them to syllables?
