@@ -13,14 +13,18 @@ instance Arbitrary Noun where
                     , C <$> arbitrary <*> arbitrary
                     ]
 
-tests = [ testGroup "Nock rewrite rules" [ wholeTreeSelection 
-                                         , leftSubtreeSelection 
-                                         , rightSubtreeSelection
-                                         , deepSubtreeSelection
+tests = [ testGroup "Nock rewrite rules" [ treeSelectionOp 
                                          , constOp
                                          ]
         ]
-wholeTreeSelection = testProperty "whole tree selection" $ \ tree -> 
+
+treeSelectionOp = testGroup "tree selection" [ wholeTreeSelection 
+                                             , leftSubtreeSelection 
+                                             , rightSubtreeSelection
+                                             , deepSubtreeSelection
+                                             ]
+
+wholeTreeSelection = testProperty "whole tree selection" $ \tree -> 
   nock (C tree (C (A 0) (A 1))) == tree
 
 leftSubtreeSelection = testProperty "left subtree selection" $ \(left, right) ->
