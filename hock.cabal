@@ -1,0 +1,29 @@
+name:              hock
+version:           0.0.0
+license:           MIT
+license-file:      LICENSE
+author:            Maciek Makowski
+maintainer:        Maciek Makowski
+synopsis:          An implementation of Urbit's Nock virtual machine.
+description:       An implementation of Urbit's Nock virtual machine. For
+                   a description of Nock see TODO.
+category:          TODO
+stability:         Experimental
+cabal-version:     >= 1.9.2 
+build-type:        Simple
+homepage:          TODO
+data-files:        README.md
+
+library
+    exposed-modules: Hock
+    build-depends: base                     >= 4.5         
+    ghc-options:  -Wall -threaded
+
+test-suite all-tests
+  type:           exitcode-stdio-1.0
+  main-is:        Test.hs
+  build-depends: base                       >= 4.5 
+               , QuickCheck                 >= 2.6 
+               , test-framework             >= 0.8
+               , test-framework-quickcheck2 >= 0.2
+  x-uses-tf:      true
