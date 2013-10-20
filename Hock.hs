@@ -41,31 +41,3 @@ nock (C a (C (A  6)   (C b (C c d)))) =
   nock (C a (C (A 2) (C (C yes no) (C (A 2) (C (C no (C c d)) (C (C no yes) (C (A 2) (C (C (A 1) (C (A 2) (A 3))) (C (C no yes) (C (A 4) (C (A 4) b)))))))))))
 nock (C a (C (A  7)   (C b c))) = nock (C a (C (A 2) (C b (C (A 1) c))))
 nock (A n)                     = error $ "*" ++ (show n)
-
-
--- test
-
--- quickcheck: for any tree
-testWholeTreeSelection = 
-  let tree = C (A 2) (C (A 6) (A 7))
-  in nock (C tree (C (A 0) (A 1))) == tree
-
--- quickcheck: for any tree with left subtree
-testLeftSubtreeSelection = 
-  let left = A 2
-      tree = C left (C (A 6) (A 7))
-  in nock (C tree (C (A 0) (A 2))) == left
-
--- quickcheck: for any tree with right subtree
-testRightSubtreeSelection = 
-  let right = C (A 6) (A 7)
-      tree = C (A 2) right
-  in nock (C tree (C (A 0) (A 3))) == right
-
-testDeepSubtreeSelection = 
-  let deep = A 5
-      tree = C (C (A 4) deep) (A 3)
-  in nock (C tree (C (A 0) (A 5))) == deep
-
--- quickcheck: for any b
-testConst = nock (C (A 1) (C (A 1) (A 2))) == (A 2)
